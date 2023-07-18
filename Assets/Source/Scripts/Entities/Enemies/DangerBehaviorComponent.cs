@@ -19,7 +19,7 @@ namespace Source.Scripts.Entities.Enemies
         private DamagableComponent damagableComponent;
         private float lastTimeAttack;
         public bool AttackInProgress;
-        private IDeathComponent deathComponent;
+        [Inject] private IDeathComponent deathComponent;
 
         private enum StateBehavior
         {
@@ -36,6 +36,10 @@ namespace Source.Scripts.Entities.Enemies
         {
             InitComponentInGameObject(out baseEnemyMovementComponent);
             InitComponentInGameObject(out damagableComponent);
+        }
+
+        private void Start()
+        {
             targetHeathComponent = baseEnemyMovementComponent.target.GetComponent<HealthComponent>();
         }
 
@@ -66,11 +70,12 @@ namespace Source.Scripts.Entities.Enemies
             {
                 if (baseEnemyMovementComponent.IsClose)
                 {
-                    UpdateFightState();
+                    ChangeState(StateBehavior.fight);
                 }
             }
             else
             {
+                lastTimeAttack = Time.time;
                 ChangeState(StateBehavior.move);
             }
         }

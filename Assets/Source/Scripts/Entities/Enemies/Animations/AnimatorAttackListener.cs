@@ -13,6 +13,7 @@ namespace Source.Scripts.Entities.Enemies.Animations
         private void Awake()
         {
             InitComponentInGameObject(out animator);
+            InitComponentInGameObject(out dangerBehaviorComponent);
         }
 
         private void OnEnable()
