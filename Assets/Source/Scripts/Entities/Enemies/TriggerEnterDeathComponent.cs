@@ -1,11 +1,11 @@
-using Source.Scripts.Entities.Enemies.Interfaces;
+using Source.Entities.Interfaces;
 using Source.Scripts.ZXRCore.Avatar;
 using UnityEngine;
 using Zenject;
 
 namespace Source.Scripts.Entities.Enemies
 {
-    public class TriggerEnterDeathComponent : MonoBehaviour, IArrowHittable
+    public class TriggerEnterDeathComponent : MonoBehaviour
     {
         [Inject] private IDeathComponent deathComponent;
         private const string TagWeapon = "Weapon";
@@ -33,11 +33,6 @@ namespace Source.Scripts.Entities.Enemies
                     deathComponent.CallDeath(other.transform.position);
                 }
             }
-        }
-        
-        public void Hit(Arrow arrow)
-        {
-            deathComponent.CallDeath(arrow.transform.position);
         }
     }
 }

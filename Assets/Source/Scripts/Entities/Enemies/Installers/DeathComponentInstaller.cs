@@ -1,5 +1,4 @@
-using Source.Scripts.Entities.Enemies.Interfaces;
-using UnityEngine;
+using Source.Entities.Interfaces;
 using Zenject;
 
 namespace Source.Scripts.Entities.Enemies.Installers

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
+using Source.Entities.Interfaces;
 using Source.Scripts.Core.Interfaces;
-using Source.Scripts.Entities.Enemies.Interfaces;
 using UnityEngine;
 using Zenject;
 
@@ -20,12 +20,12 @@ namespace Source.Scripts.Entities.Enemies
 
         private void OnEnable()
         {
-            deathComponent.DeathPhysicsAction += Dead;
+            deathComponent.DeathPhysicsAction += ImpactOfHit;
         }
 
         private void OnDisable()
         {
-            deathComponent.DeathPhysicsAction -= Dead;
+            deathComponent.DeathPhysicsAction -= ImpactOfHit;
         }
 
         private void InitRigidbodies()
@@ -42,17 +42,13 @@ namespace Source.Scripts.Entities.Enemies
             }
         }
 
-        private void ChangeStateRagDollPhysics(bool state)
+        public void ImpactOfHit(Vector3 hitPosition)
         {
             for (int i = 0; i < rigidbodies.Count; i++)
             {
-                rigidbodies[i].isKinematic = state;
+                rigidbodies[i].isKinematic = false;
             }
-        }
-
-        private void Dead(Vector3 hitPosition)
-        {
-            ChangeStateRagDollPhysics(false);
+            
             Collider[] colliders = Physics.OverlapSphere(hitPosition, rangeOverlapExplo);
             for (int i = 0; i < colliders.Length; i++)
             {

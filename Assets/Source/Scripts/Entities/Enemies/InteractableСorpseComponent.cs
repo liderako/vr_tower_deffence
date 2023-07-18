@@ -1,5 +1,4 @@
-using System;
-using Source.Scripts.Entities.Enemies.Interfaces;
+using Source.Entities.Interfaces;
 using UnityEngine;
 using Zenject;
 using ZXRCore.Interactable;

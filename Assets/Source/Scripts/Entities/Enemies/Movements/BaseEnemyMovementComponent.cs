@@ -1,4 +1,5 @@
 using System;
+using Source.Entities.Interfaces;
 using Source.Scripts.Core.Interfaces;
 using Source.Scripts.Entities.Enemies.Interfaces;
 using Source.Scripts.Entities.Enemies.MovementComponent.Interfaces;
@@ -12,9 +13,9 @@ namespace Source.Scripts.Entities.Enemies.MovementComponent
     public abstract class BaseEnemyMovementComponent : BaseComponent, IDeathListener, IMovementSource
     {
         [field:SerializeField] public float MinDistance { get; set; }
-        [Inject] protected AvatarComponent player;
         [Inject] protected IDeathComponent deathComponent;
         public virtual event Action<bool> StateMovement;
+        public Transform target { get; set; }
         public bool IsClose { get; set; }
         public bool IsMove { get; set; }
 
@@ -43,7 +44,7 @@ namespace Source.Scripts.Entities.Enemies.MovementComponent
 
         public virtual void CalculateDistance()
         {
-            if (Vector3.Distance(player.transform.position, transform.position) < MinDistance)
+            if (Vector3.Distance(target.position, transform.position) < MinDistance)
             {
                 IsClose = true;
                 ChangeStateMovement(false);

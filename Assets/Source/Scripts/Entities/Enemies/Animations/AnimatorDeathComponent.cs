@@ -1,3 +1,4 @@
+using Source.Entities.Interfaces;
 using Source.Scripts.Core.Interfaces;
 using Source.Scripts.Entities.Enemies.Interfaces;
 using UnityEngine;
