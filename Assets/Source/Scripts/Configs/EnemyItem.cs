@@ -10,5 +10,6 @@ namespace Source.Configs
         [Range(0, 10)] public float speed; 
         public AliveItem aliveItem;
         public float defaultDamage;
+        public float coolDownAttack;
     }
 }
