@@ -622,9 +622,9 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: 0.025, y: 1.5, z: -0.41499996}
-  - {x: 0.025, y: 1, z: -0.41499996}
-  - {x: 0.025, y: 0.45, z: -0.41499996}
+  - {x: -0.25, y: 1.5, z: -0.16499996}
+  - {x: -0.25, y: 1, z: -0.16499996}
+  - {x: -0.25, y: 0.45, z: -0.16499996}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.01
@@ -722,6 +722,7 @@ GameObject:
   - component: {fileID: 2143200573330859535}
   - component: {fileID: 2851339653200483893}
   - component: {fileID: 6142289673397325642}
+  - component: {fileID: 3431239795207799090}
   m_Layer: 0
   m_Name: Measurer
   m_TagString: Untagged
@@ -851,6 +852,33 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.1, y: 0.1, z: 0.1}
   m_Center: {x: 0, y: 0, z: -0.05}
+--- !u!114 &3431239795207799090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7571621245530164144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f192763d6baf4ee9a2e0a353a7672190, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hapticOnActivated:
+    intensity: 0
+    duration: 0
+  hapticHoverEntered:
+    intensity: 0
+    duration: 0
+  hapticHoverExited:
+    intensity: 0
+    duration: 0
+  hapticSelectEntered:
+    intensity: 0
+    duration: 0
+  hapticSelectExited:
+    intensity: 0.3
+    duration: 0.1
 --- !u!1 &7734374462635211803
 GameObject:
   m_ObjectHideFlags: 0

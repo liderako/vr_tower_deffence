@@ -214,6 +214,7 @@ GameObject:
   - component: {fileID: 961699093}
   - component: {fileID: 8893175605756640143}
   - component: {fileID: 7747872176572643193}
+  - component: {fileID: 3985443106659349983}
   m_Layer: 7
   m_Name: Arrow
   m_TagString: Weapon
@@ -445,6 +446,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Damage>k__BackingField: 10
+--- !u!114 &3985443106659349983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8542102953145869890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f192763d6baf4ee9a2e0a353a7672190, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hapticOnActivated:
+    intensity: 0
+    duration: 0
+  hapticHoverEntered:
+    intensity: 0
+    duration: 0
+  hapticHoverExited:
+    intensity: 0
+    duration: 0
+  hapticSelectEntered:
+    intensity: 0.1
+    duration: 0.1
+  hapticSelectExited:
+    intensity: 0.1
+    duration: 0.1
 --- !u!1 &8589002692731022628
 GameObject:
   m_ObjectHideFlags: 0
@@ -469,7 +497,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8589002692731022628}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.425}
+  m_LocalPosition: {x: 0, y: 0, z: -0.4265}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

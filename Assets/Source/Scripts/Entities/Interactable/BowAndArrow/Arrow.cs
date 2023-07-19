@@ -4,10 +4,11 @@ using Source.Scripts.Entities;
 using Source.Scripts.ZXRCore.Avatar;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
+using ZXRCore.Interactable;
 
 namespace Source.Core.Interactable.BowAndArrow
 {
-    public class Arrow : XRGrabInteractable
+    public class Arrow : ZXRGrabInteractable
     {
         [SerializeField] private float speed = 2000.0f;
 
@@ -16,9 +17,7 @@ namespace Source.Core.Interactable.BowAndArrow
         private ArrowCaster caster;
 
         private bool launched = false;
-
         private RaycastHit hit;
-        
 
         protected override void Awake()
         {
@@ -97,20 +96,19 @@ namespace Source.Core.Interactable.BowAndArrow
                 hittable.Hit(GetComponent<DamagableComponent>());   
             }
         }
-
-        public override bool IsSelectableBy(IXRSelectInteractor interactor)
-        {
-            return base.IsSelectableBy(interactor) && !launched;
-        }
         
         private void Update()
         {
-            // Rotate arrow based on its velocity (rotating around the X axis)
             if (launched)
             {
                 Vector3 newDir = Vector3.RotateTowards(transform.forward, rigidbody.velocity, Time.deltaTime * speed, 0.0f);
                 transform.rotation = Quaternion.LookRotation(newDir);
             }
+        }
+
+        public override bool IsSelectableBy(IXRSelectInteractor interactor)
+        {
+            return base.IsSelectableBy(interactor) && !launched;
         }
     }
 }

@@ -7,9 +7,5 @@ namespace Source.Scripts.ZXRCore.Avatar
 
     public class AvatarComponent : BaseComponent
     {
-        private void Awake()
-        {
-            Debug.Log(Time.timeScale);
-        }
     }
 }

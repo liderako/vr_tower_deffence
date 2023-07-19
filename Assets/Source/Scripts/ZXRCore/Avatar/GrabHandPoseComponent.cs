@@ -24,10 +24,9 @@ namespace Source.Scripts.ZXRCore.Avatar
         private Quaternion[] startFingerRotations;
         private Quaternion[] endFingerRotations;
 
-        private void Start()
+        private void Awake()
         {
             InitComponentInGameObject(out grabInteractable);
-
             grabInteractable.selectEntered.AddListener(SetupPose);
             grabInteractable.selectExited.AddListener(UnSetupPose);
             rightHandPose.gameObject.SetActive(false);
@@ -63,8 +62,7 @@ namespace Source.Scripts.ZXRCore.Avatar
         {
             if (args.interactorObject is XRDirectInteractor)
             {
-                HandDataComponent handDataComponent =
-                    args.interactorObject.transform.GetComponentInChildren<HandDataComponent>();
+                HandDataComponent handDataComponent = args.interactorObject.transform.GetComponentInChildren<HandDataComponent>();
                 if (handDataComponent.animator != null)
                 {
                     handDataComponent.animator.enabled = true;
@@ -102,8 +100,7 @@ namespace Source.Scripts.ZXRCore.Avatar
             }
         }
 
-        private void SetHandData(HandDataComponent h, Vector3 newPosition, Quaternion newRotation,
-            Quaternion[] newBonesRotation)
+        private void SetHandData(HandDataComponent h, Vector3 newPosition, Quaternion newRotation, Quaternion[] newBonesRotation)
         {
             h.root.localPosition = newPosition;
             h.root.localRotation = newRotation;
@@ -117,16 +114,15 @@ namespace Source.Scripts.ZXRCore.Avatar
             Quaternion[] newBonesRotation, Vector3 startingPosition, Quaternion startingRotation,
             Quaternion[] startingBonesRotation)
         {
-            float timer = 0;
+            float timer = Time.deltaTime;
 
             while (timer < poseTransitionDuration)
             {
                 Vector3 p = Vector3.Lerp(startingPosition, newPosition, timer / poseTransitionDuration);
-                Quaternion r = Quaternion.Lerp(startingRotation, newRotation, timer / poseTransitionDuration);
+                Quaternion r = Quaternion.Lerp(startingRotation, newRotation, (timer / poseTransitionDuration) + 0.01f);
 
                 h.root.localPosition = p;
                 h.root.localRotation = r;
-
                 for (int i = 0; i < newBonesRotation.Length; i++)
                 {
                     h.fingerBones[i].localRotation = Quaternion.Lerp(startingBonesRotation[i], newBonesRotation[i],
@@ -138,7 +134,6 @@ namespace Source.Scripts.ZXRCore.Avatar
             }
         }
 #if UNITY_EDITOR
-
         [MenuItem("Tools/Mirror Selected Right Grab Pose")]
         public static void MirrorRightPose()
         {
