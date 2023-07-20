@@ -31,13 +31,25 @@ namespace Source.Scripts.Entities.Enemies.MovementComponent
             navMeshAgent.SetDestination(target.position);
         }
 
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            StateMovement += OnHandleStateMovement;
+        }
+
         protected override void OnDisable()
         {
             base.OnDisable();
             if (navMeshAgent.isOnNavMesh)
             {
-                navMeshAgent.Stop();   
+                navMeshAgent.isStopped = true;   
             }
+            StateMovement -= OnHandleStateMovement;
+        }
+
+        private void OnHandleStateMovement(bool state)
+        {
+            navMeshAgent.isStopped = !state;
         }
     }
 }

@@ -22,6 +22,7 @@ namespace Source.Scripts.Entities.Enemies.MovementComponent
         protected virtual void OnEnable()
         {
             deathComponent.DeathAction += OnHandleDeath;
+            // StateMovemen/
             Activate();
         }
 
