@@ -14,11 +14,14 @@ namespace Source.Scripts.Entities.Interactable
         [SerializeField] private Collider collider;
         private bool launched;
         private ZXRGrabInteractable zxrGrabInteractable;
+        private const int LayerThrowObject = 8;
+        private int originLayer;
 
         private void Awake()
         {
             InitComponentInGameObject(out rigidbody);
             InitComponentInGameObject(out zxrGrabInteractable);
+            originLayer = gameObject.layer;
         }
 
         private void OnEnable()
@@ -35,10 +38,17 @@ namespace Source.Scripts.Entities.Interactable
         {
             if (args.interactorObject is XRDirectInteractor)
             {
+                ChangeLayer(LayerThrowObject);
                 rigidbody.isKinematic = false;
                 rigidbody.useGravity = true;
                 launched = true;
             }
+        }
+
+        private void ChangeLayer(int layer)
+        {
+            gameObject.layer = LayerThrowObject;
+            collider.gameObject.layer = LayerThrowObject;
         }
 
         private void PickUp(SelectEnterEventArgs args)
@@ -70,6 +80,7 @@ namespace Source.Scripts.Entities.Interactable
         {
             if (launched)
             {
+                ChangeLayer(originLayer);
                 launched = false;
                 rigidbody.isKinematic = true;
                 rigidbody.useGravity = false;
