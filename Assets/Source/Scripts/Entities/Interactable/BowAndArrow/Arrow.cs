@@ -30,9 +30,10 @@ namespace Source.Core.Interactable.BowAndArrow
         protected override void OnSelectExited(SelectExitEventArgs args)
         {
             base.OnSelectExited(args);
-
+            Debug.Log("args.interactorObject is Notch notch " + args.interactorObject is Notch);
             if (args.interactorObject is Notch notch)
             {
+                Debug.Log("args.324444444 is Notch notch ");
                 if (notch.CanRelease)
                 {
                     LaunchArrow(notch);   
@@ -42,6 +43,7 @@ namespace Source.Core.Interactable.BowAndArrow
 
         private void LaunchArrow(Notch notch)
         {
+            Debug.Log(launched);
             launched = true;
             ApplyForce(notch.PullMeasurer);
             dangerColliderComponent.State = true;
@@ -50,6 +52,7 @@ namespace Source.Core.Interactable.BowAndArrow
 
         private void ApplyForce(PullMeasurer pullMeasurer)
         {
+            Debug.Log(transform.forward * (pullMeasurer.PullAmount * speed));
             rigidbody.AddForce(transform.forward * (pullMeasurer.PullAmount * speed));
         }
 
@@ -62,6 +65,7 @@ namespace Source.Core.Interactable.BowAndArrow
                 yield return null;
             }
 
+            Debug.Log("Collide");
             dangerColliderComponent.State = false;
             // Once the arrow has stopped flying
             DisablePhysics();

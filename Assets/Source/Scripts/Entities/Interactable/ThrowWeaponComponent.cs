@@ -47,8 +47,8 @@ namespace Source.Scripts.Entities.Interactable
 
         private void ChangeLayer(int layer)
         {
-            gameObject.layer = LayerThrowObject;
-            collider.gameObject.layer = LayerThrowObject;
+            gameObject.layer = layer;
+            collider.gameObject.layer = layer;
         }
 
         private void PickUp(SelectEnterEventArgs args)

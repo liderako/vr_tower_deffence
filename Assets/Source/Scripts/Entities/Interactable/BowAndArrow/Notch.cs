@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
+using ZXRCore.Interactable;
 
 namespace Source.Core.Interactable.BowAndArrow
 {
     public class Notch : XRSocketInteractor
     {
-        [SerializeField, Range(0, 1)] private float releaseThreshold = 0.25f;
+        [SerializeField, Range(0, 1)] private float releaseThreshold = 0.05f;
         [SerializeField] private AudioSource audioSource;
-        public Bow Bow { get; private set; }
+        [SerializeField] private ZXRGrabInteractable Bow;
         public PullMeasurer PullMeasurer { get; private set; }
 
         public bool CanRelease => PullMeasurer.PullAmount > releaseThreshold;
@@ -15,22 +16,10 @@ namespace Source.Core.Interactable.BowAndArrow
         protected override void Awake()
         {
             base.Awake();
-            Bow = GetComponentInParent<Bow>();
             PullMeasurer = GetComponentInChildren<PullMeasurer>();
         }
-
-        protected override void OnEnable()
-        {
-            base.OnEnable();
-            PullMeasurer.selectExited.AddListener(ReleaseArrow);
-        }
-
-        protected override void OnDisable()
-        {
-            base.OnDisable();
-            PullMeasurer.selectExited.RemoveListener(ReleaseArrow);
-        }
-
+        
+        // events for select exited PullMeasurer
         public void ReleaseArrow(SelectExitEventArgs args)
         {
             if (hasSelection)
@@ -43,9 +32,10 @@ namespace Source.Core.Interactable.BowAndArrow
         public override void ProcessInteractor(XRInteractionUpdateOrder.UpdatePhase updatePhase)
         {
             base.ProcessInteractor(updatePhase);
-
             if (Bow.isSelected)
-                UpdateAttach();
+            {
+                UpdateAttach();   
+            }
         }
 
         public void UpdateAttach()
@@ -70,8 +60,9 @@ namespace Source.Core.Interactable.BowAndArrow
         private bool CanHover(IXRSelectInteractable interactable)
         {
             if (interactable is IXRHoverInteractable hoverInteractable)
-                return CanHover(hoverInteractable);
-
+            {
+                return CanHover(hoverInteractable);   
+            }
             return false;
         }
     }
